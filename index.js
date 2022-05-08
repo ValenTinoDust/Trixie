@@ -1,3 +1,4 @@
+const keepAlive = require("./server.js")
 const Discord = require('discord.js')
 const axios = require('axios')
 const client = new Discord.Client({ intents: [Discord.Intents.FLAGS.GUILDS, Discord.Intents.FLAGS.GUILD_MEMBERS, Discord.Intents.FLAGS.GUILD_BANS, Discord.Intents.FLAGS.GUILD_MESSAGES, Discord.Intents.FLAGS.DIRECT_MESSAGES, Discord.Intents.FLAGS.GUILD_MESSAGE_REACTIONS] })
@@ -87,4 +88,5 @@ client.on("messageCreate", msg => {
 })
 client.on('error', e => console.log(e))
 const mySecret = process.env['TrixieToken']
+keepAlive()
 client.login(mySecret)
