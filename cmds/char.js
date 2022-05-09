@@ -1,4 +1,3 @@
-const Discord = require('discord.js')
 const { MessageEmbed } = require('discord.js')
 const axios = require('axios')
 var fs = require('fs')
@@ -13,7 +12,7 @@ async function displayChar(msg, args, filter){
   args = args.join(" ")
   try {
     if(args.length == 0) return msg.channel.send("Name the ponies you are looking for!")
-    const resp = await axios.get((filter == "name" ? data.character.charURL : filter == "kind" ? data.character.charKindURL : filter == "occupation" ? data.character.charOccURL : "residence") + args)
+    const resp = await axios.get((filter == "name" ? data.character.charURL : filter == "kind" ? data.character.charKindURL : filter == "occupation" ? data.character.charOccURL : data.character.charResURL) + args)
     if(resp.data.data.length == 0) return msg.channel.send("No characters matched")
     const pages = []
     for await (const pony of resp.data.data){
@@ -28,7 +27,7 @@ async function displayChar(msg, args, filter){
       if(user.bot) return false
       return reaction.emoji.name === '◀' || reaction.emoji.name === '▶'
     }
-    const collector = embedMsg.createReactionCollector( { filter: collectorFilter }, { time: 60000, dispose: true })
+    const collector = embedMsg.createReactionCollector( { filter: collectorFilter, time: 120000, dispose: true })
     collector.on("collect", (reaction, user) => {
       if(reaction.emoji.name === '▶'){
         embedMsg.reactions.resolve("▶").users.remove(user.id)

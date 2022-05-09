@@ -6,6 +6,7 @@ var fs = require('fs')
 const {displayChar: char} = require("./cmds/char.js")
 const {displaySong: song} = require("./cmds/song.js")
 const {displayImg: img} = require("./cmds/image.js")
+const {help} = require("./cmds/help.js")
 
 fs.readFile('/home/runner/Trixie/Data.json', 'utf8', function (err, _data) {
   if (err) throw err
@@ -83,6 +84,13 @@ client.on("messageCreate", msg => {
     case "imgchar":
     case "imgbychar":
       img(msg, args, "character")
+      break
+    case "help":
+    case "commands":
+    case "cmds":
+    case "command":
+    case "cmd":
+      help(msg)
       break
   }
 })

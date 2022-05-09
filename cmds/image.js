@@ -1,4 +1,3 @@
-const Discord = require('discord.js')
 const { MessageEmbed } = require('discord.js')
 const axios = require('axios')
 var fs = require('fs')
@@ -28,7 +27,7 @@ async function displayImg(msg, args, filter){
       if(user.bot) return false
       return reaction.emoji.name === '◀' || reaction.emoji.name === '▶'
     }
-    const collector = embedMsg.createReactionCollector( { filter: collectorFilter }, { time: 60000, dispose: true })
+    const collector = embedMsg.createReactionCollector( { filter: collectorFilter, time: 120000, dispose: true })
     collector.on("collect", (reaction, user) => {
       if(reaction.emoji.name === '▶'){
         embedMsg.reactions.resolve("▶").users.remove(user.id)
