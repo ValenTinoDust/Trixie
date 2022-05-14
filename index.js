@@ -16,6 +16,11 @@ fs.readFile('/home/runner/Trixie/Data.json', 'utf8', function (err, _data) {
 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}`)
+  let guild = client.guilds.cache.get('970030731877314640'), channel
+  if(guild){
+    channel = guild.channels.cache.get("970030732368019568")
+    if(channel) channel.send("Bot restarted")
+  }
 })
 
 client.on("messageCreate", msg => {
